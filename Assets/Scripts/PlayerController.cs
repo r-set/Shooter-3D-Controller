@@ -145,6 +145,5 @@ public class PlayerController : MonoBehaviour
             bulletController.Target = _cameraMainTransform.position + _cameraMainTransform.forward * _bulletHitMaxMiss;
             bulletController.Hit = false;
         }
-
-      }
+    }
 }
