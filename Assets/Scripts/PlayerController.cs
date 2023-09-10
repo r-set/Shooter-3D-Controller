@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _gunTransform;
     [SerializeField] private float _bulletHitMaxMiss = 25f;
     [SerializeField] private Transform _bulletParent;
+    [SerializeField] private LayerMask _mask;
 
     void Awake()
     {
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
         _moveXAnimatorId = Animator.StringToHash("MoveX");
         _moveZAnimatorId = Animator.StringToHash("MoveY");
         _jumpAnimator = Animator.StringToHash("Jump");
+        _mask = LayerMask.NameToLayer("Player");
     }
 
     void Start()
@@ -135,7 +137,8 @@ public class PlayerController : MonoBehaviour
         BulletController bulletController = bullet.GetComponent<BulletController>();
 
         RaycastHit hit;
-        if (Physics.Raycast(_cameraMainTransform.position, _cameraMainTransform.forward, out hit, Mathf.Infinity))
+
+        if (Physics.Raycast(_cameraMainTransform.position, _cameraMainTransform.forward, out hit, Mathf.Infinity, _mask))
         {
             bulletController.Target = hit.point;
             bulletController.Hit = true;
